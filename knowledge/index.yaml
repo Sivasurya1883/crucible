@@ -1,3 +1,16 @@
 documents:
-  - incidents.md
-  - playbooks.md
+  - path: incident-patterns.md
+    tags: [scenarios, failure-modes, distributed-systems]
+    priority: high
+    always_load: true
+  - path: evaluation-rubric.md
+    tags: [scoring, assessment, best-practices]
+    priority: high
+    always_load: true
+  - path: playbooks.md
+    tags: [response, best-practices, procedures]
+    priority: high
+    always_load: true
+  - path: chaos-scenarios.md
+    tags: [chaos-engineering, experiments, testing]
+    priority: medium

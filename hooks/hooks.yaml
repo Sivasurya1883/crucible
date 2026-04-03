@@ -1,0 +1,16 @@
+hooks:
+  on_session_start:
+    - script: scripts/load-exercise-context.sh
+      description: Load knowledge base and previous exercise history from memory
+
+  pre_tool_use:
+    - script: scripts/exercise-safety-check.sh
+      description: Ensure no exercise content could be confused with real production alerts
+
+  post_response:
+    - script: scripts/track-exercise-state.sh
+      description: Track exercise phase, decision count, and elapsed exercise time
+
+  on_error:
+    - script: scripts/graceful-exercise-end.sh
+      description: If an error occurs mid-exercise, save current state and produce a partial report

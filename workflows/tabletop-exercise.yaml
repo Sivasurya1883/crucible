@@ -1,0 +1,72 @@
+name: tabletop-exercise
+description: Full incident response tabletop exercise pipeline — from scenario generation through graded report
+version: 1.0.0
+
+inputs:
+  - name: architecture
+    type: string
+    required: true
+    description: Description of the participant's system architecture
+  - name: difficulty
+    type: string
+    default: adaptive
+    description: Exercise difficulty (beginner, intermediate, advanced, adaptive)
+  - name: focus
+    type: string
+    default: full-lifecycle
+    description: Exercise focus area (detection, communication, decision-making, full-lifecycle)
+
+steps:
+  scenario:
+    skill: scenario-architect
+    description: Generate a tailored incident scenario based on participant architecture
+    inputs:
+      architecture: ${{ inputs.architecture }}
+      difficulty: ${{ inputs.difficulty }}
+      focus: ${{ inputs.focus }}
+    outputs: [scenario_briefing, blast_radius, injects, success_criteria]
+
+  simulation:
+    skill: inject-engine
+    depends_on: [scenario]
+    description: Run the interactive exercise with escalating injects based on participant responses
+    inputs:
+      scenario: ${{ steps.scenario.outputs.scenario_briefing }}
+      injects: ${{ steps.scenario.outputs.injects }}
+      difficulty: ${{ inputs.difficulty }}
+    outputs: [decision_timeline, response_log, stakeholder_satisfaction]
+
+  evaluation:
+    skill: response-evaluator
+    depends_on: [simulation]
+    description: Score all participant decisions against the evaluation rubric
+    inputs:
+      decisions: ${{ steps.simulation.outputs.decision_timeline }}
+      success_criteria: ${{ steps.scenario.outputs.success_criteria }}
+    outputs: [scores, strengths, gaps]
+
+  debrief:
+    skill: debrief-facilitator
+    depends_on: [evaluation]
+    description: Lead a structured after-action review with the participant
+    inputs:
+      timeline: ${{ steps.simulation.outputs.decision_timeline }}
+      scores: ${{ steps.evaluation.outputs.scores }}
+      strengths: ${{ steps.evaluation.outputs.strengths }}
+      gaps: ${{ steps.evaluation.outputs.gaps }}
+    outputs: [debrief_notes, action_items]
+
+  report:
+    skill: exercise-reporter
+    depends_on: [evaluation, debrief]
+    description: Produce the final graded exercise report with trends and recommendations
+    inputs:
+      scenario: ${{ steps.scenario.outputs.scenario_briefing }}
+      blast_radius: ${{ steps.scenario.outputs.blast_radius }}
+      timeline: ${{ steps.simulation.outputs.decision_timeline }}
+      scores: ${{ steps.evaluation.outputs.scores }}
+      strengths: ${{ steps.evaluation.outputs.strengths }}
+      gaps: ${{ steps.evaluation.outputs.gaps }}
+      stakeholder_satisfaction: ${{ steps.simulation.outputs.stakeholder_satisfaction }}
+      action_items: ${{ steps.debrief.outputs.action_items }}
+    outputs: [exercise_report]

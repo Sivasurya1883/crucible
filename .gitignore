@@ -1,0 +1,4 @@
+.env
+.gitagent/
+node_modules/
+.DS_Store

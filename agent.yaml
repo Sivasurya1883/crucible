@@ -1,19 +1,36 @@
 spec_version: "0.1.0"
-name: incident-commander-ai
+name: crucible
 version: 1.0.0
-description: "Autonomous AI Incident Commander for triaging, analyzing, and resolving production incidents"
+description: "AI incident drill instructor — runs adaptive tabletop exercises that train engineering teams for production failures before they happen"
+
 model:
-  preferred: claude-sonnet-4-5-20250929
+  preferred: groq:llama-3.3-70b-versatile
+  fallback:
+    - groq:llama-3.1-8b-instant
+  constraints:
+    temperature: 0.8
+    max_tokens: 8192
 
 skills:
-  - incident-triage
-  - root-cause-analysis
-  - resolution-planner
-  - status-communication
-  - postmortem-generator
+  - scenario-architect
+  - inject-engine
+  - response-evaluator
+  - debrief-facilitator
+  - exercise-reporter
+
+runtime:
+  max_turns: 100
+  timeout: 600
 
 tags:
+  - hackathon
+  - incident-response
+  - tabletop-exercise
+  - training
   - sre
-  - incident-management
-  - devops
-  - ai-agent
+  - simulation
+  - chaos-engineering
+
+metadata:
+  domain: incident-response-training
+  exercise_types: "cascading-failure, silent-corruption, external-dependency, deployment-gone-wrong, security-incident, ghost-incident, capacity-crisis"
