@@ -3,23 +3,14 @@ import fs from "fs";
 
 const soul = fs.readFileSync("./SOUL.md", "utf-8");
 const rules = fs.readFileSync("./RULES.md", "utf-8");
-const duties = fs.readFileSync("./DUTIES.MD", "utf-8");
 const patterns = fs.readFileSync("./knowledge/incident-patterns.md", "utf-8");
-const rubric = fs.readFileSync("./knowledge/evaluation-rubric.md", "utf-8");
 const playbooks = fs.readFileSync("./knowledge/playbooks.md", "utf-8");
-const chaos = fs.readFileSync("./knowledge/chaos-scenarios.md", "utf-8");
 
-const skills = [
-  "scenario-architect",
-  "inject-engine",
-  "response-evaluator",
-  "debrief-facilitator",
-  "exercise-reporter",
-]
+const coreSkills = ["scenario-architect", "inject-engine", "response-evaluator"]
   .map((s) => fs.readFileSync(`./skills/${s}/SKILL.md`, "utf-8"))
   .join("\n\n---\n\n");
 
-const systemPrompt = `${soul}\n\n${rules}\n\n${duties}\n\n# Skills\n${skills}\n\n# Knowledge Base\n\n${patterns}\n\n${rubric}\n\n${playbooks}\n\n${chaos}`;
+const systemPrompt = `${soul}\n\n${rules}\n\n# Core Skills\n${coreSkills}\n\n# Knowledge\n${patterns}\n\n${playbooks}`;
 
 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
