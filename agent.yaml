@@ -1,0 +1,19 @@
+spec_version: "0.1.0"
+name: incident-commander-ai
+version: 1.0.0
+description: "Autonomous AI Incident Commander for triaging, analyzing, and resolving production incidents"
+model:
+  preferred: claude-sonnet-4-5-20250929
+
+skills:
+  - incident-triage
+  - root-cause-analysis
+  - resolution-planner
+  - status-communication
+  - postmortem-generator
+
+tags:
+  - sre
+  - incident-management
+  - devops
+  - ai-agent

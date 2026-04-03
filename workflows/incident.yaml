@@ -1,0 +1,6 @@
+steps:
+  - incident-triage
+  - root-cause-analysis
+  - resolution-planner
+  - status-communication
+  - postmortem-generator
