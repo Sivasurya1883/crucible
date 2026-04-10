@@ -4,9 +4,10 @@ version: 1.0.0
 description: "AI incident drill instructor — runs adaptive tabletop exercises that train engineering teams for production failures before they happen"
 
 model:
-  preferred: groq:llama-3.3-70b-versatile
+  preferred: anthropic:claude-sonnet-4-5-20250929
   fallback:
-    - groq:llama-3.1-8b-instant
+    - openai:gpt-4o
+    - groq:llama-3.3-70b-versatile
   constraints:
     temperature: 0.8
     max_tokens: 8192
