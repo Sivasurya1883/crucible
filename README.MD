@@ -148,30 +148,80 @@ Crucible's knowledge base contains real-world incident management expertise:
 
 ---
 
-## Run with gitclaw
+## Getting Started — Step by Step
+
+### Prerequisites
+
+- Node.js 18+ ([download](https://nodejs.org/))
+- npm (comes with Node.js)
+- git
+- An API key from **Anthropic** (recommended) or **OpenAI**
+
+### Step 1: Clone the repository
 
 ```bash
-# Install
-npm install -g gitclaw
-
-# Set your API key (Claude recommended for best results)
-export ANTHROPIC_API_KEY="sk-..."
-# OR
-export OPENAI_API_KEY="sk-..."
-
-# Run the exercise
-gitclaw --dir . "Run a tabletop exercise for our e-commerce platform"
+git clone https://github.com/Sivasurya1883/crucible.git
+cd crucible
 ```
 
----
-
-## Validate
+### Step 2: Validate the agent definition
 
 ```bash
 npx gitagent validate
 npx gitagent info
+```
+
+Expected output: all checks pass, 5 skills detected, model and runtime config displayed.
+
+### Step 3: Preview the assembled system prompt
+
+```bash
 npx gitagent export -f system-prompt
 ```
+
+This shows the full system prompt that gitclaw assembles from SOUL.md, RULES.md, skills, and knowledge — the complete agent identity in one view.
+
+### Step 4: Install gitclaw and set your API key
+
+```bash
+npm install -g gitclaw
+
+# Claude (recommended — best scenario depth and persona quality)
+export ANTHROPIC_API_KEY="your-anthropic-key"
+
+# OR OpenAI
+export OPENAI_API_KEY="your-openai-key"
+```
+
+### Step 5: Run a tabletop exercise
+
+**Option A — Quick start (single prompt):**
+
+```bash
+gitclaw --dir . "Run a tabletop exercise for an e-commerce platform with a Node.js API, PostgreSQL database, Redis cache, and Stripe payment integration serving 50k requests per minute"
+```
+
+**Option B — Custom architecture:**
+
+```bash
+gitclaw --dir . "I'm an on-call engineer at a fintech startup. Our stack is Kubernetes on AWS, with a Python FastAPI backend, MongoDB, and RabbitMQ. Run me through a tabletop exercise."
+```
+
+**Option C — Security-focused drill:**
+
+```bash
+gitclaw --dir . "Run a security incident tabletop exercise for a SaaS platform with React frontend, Go microservices, PostgreSQL, and Redis on GCP"
+```
+
+### Step 6: Play through the exercise
+
+Crucible will:
+1. Present two paths: **Guided Scenario** (pick your role) or **Bring Your Own Stack** (describe your architecture)
+2. Generate a tailored incident scenario with metrics, blast radius, and stakeholder pressure
+3. Present multiple-choice decisions each round — respond with A, B, C, or D
+4. Escalate with curveballs, stakeholder messages, and new complications
+5. Run a structured debrief after 5-7 rounds
+6. Produce a graded report with scores, gaps, and chaos engineering recommendations
 
 ---
 
