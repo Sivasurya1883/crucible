@@ -7,7 +7,6 @@ model:
   preferred: anthropic:claude-sonnet-4-5-20250929
   fallback:
     - openai:gpt-4o
-    - groq:llama-3.3-70b-versatile
   constraints:
     temperature: 0.8
     max_tokens: 8192

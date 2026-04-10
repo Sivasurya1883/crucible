@@ -151,24 +151,16 @@ Crucible's knowledge base contains real-world incident management expertise:
 ## Run with gitclaw
 
 ```bash
+# Install
 npm install -g gitclaw
 
-# Recommended: use Claude or OpenAI for best results
+# Set your API key (Claude recommended for best results)
 export ANTHROPIC_API_KEY="sk-..."
 # OR
 export OPENAI_API_KEY="sk-..."
-# OR (free, but with token limits)
-export GROQ_API_KEY="gsk_..."
 
+# Run the exercise
 gitclaw --dir . "Run a tabletop exercise for our e-commerce platform"
-```
-
-### Quick Demo (Groq — free, no signup cost)
-
-```bash
-npm install groq-sdk
-export GROQ_API_KEY="gsk_..."
-node demo.js
 ```
 
 ---
